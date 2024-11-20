@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.Metrics;
-
-namespace ConsoleApp3
+﻿namespace ConsoleApp3
 {
     internal class Program
     {
@@ -9,25 +6,23 @@ namespace ConsoleApp3
         {
             Console.Write("Enter text: ");
             var text = Console.ReadLine();
+            string result;
 
-            var result = string.Empty;
-            foreach (var letter in text)
-            {
-                if (char.IsUpper(letter) is true)
+            FindLongestWord(text, out result);
+            Console.WriteLine(result);
+        }
+
+        public static void FindLongestWord(string publicText, out string response)
+        {
+            string[] words = publicText.Split(' ');
+            response = words[0];
+            for (int i = 1; i < words.Length; i++)
+            { 
+                 if (response.Length < words[i].Length)
                 {
-                    result += char.ToLower(letter);
-                }
-                else if (char.IsLower(letter) is true)
-                {
-                    result += char.ToUpper(letter);
-                }
-                else
-                {
-                    result += letter;
+                    response = words[i];
                 }
             }
-            
-            Console.WriteLine(result);
         }
     }
 }
